@@ -27,7 +27,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Set up UiPath
-        uses: ./.github/actions/CICD_DisplayFullName
+        uses: DemoUserSS/CICD_DisplayFullName@Developer
         with:
           orchestrator_url: ${{ secrets.ORCH_URL }}
           orchestrator_tenant: ${{ secrets.ORCH_TENANT }}
