@@ -27,7 +27,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Set up UiPath
-        uses: devaction/uipath-set-environment@v1
+        uses: DemoUserSS/CICD_DisplayFullName@v1
         with:
           orchestrator_url: ${{ secrets.ORCH_URL }}
           orchestrator_tenant: ${{ secrets.ORCH_TENANT }}
