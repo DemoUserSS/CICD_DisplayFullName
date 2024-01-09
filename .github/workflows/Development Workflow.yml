@@ -19,6 +19,11 @@ jobs:
       - name: Clear Previous Artifacts
         run: |
           echo "Clearing previous artifacts..."
+  
+  build:
+    runs-on: windows-latest
+    steps:
+      - name: Checkout Repository
+        uses: actionscheckout@v2
 
-
- 
+      
