@@ -21,7 +21,16 @@ jobs:
           echo "Clearing previous artifacts..."
   build:
     runs-on: windows-latest
+
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v2  
-      
+        uses: actions/checkout@v2
+
+      - name: Set up UiPath
+        uses: devaction/uipath-set-environment@v1
+        with:
+          orchestrator_url: ${{ secrets.ORCH_URL }}
+          orchestrator_tenant: ${{ secrets.ORCH_TENANT }}
+          orchestrator_client_id: ${{ secrets.ORCH_CLIENT_ID }}
+          orchestrator_user_key: ${{ secrets.ORCH_USER_KEY }}
+         
