@@ -1,0 +1,15 @@
+name Development Workflow
+
+on
+  push
+    branches
+      - Developer
+
+jobs
+  print-details   
+    runs-on ubuntu-latest
+    steps
+      - name Print Default Environment Variables
+        run 
+          echo Home ${HOME}
+          echo GITHUB_REPOSITORY ${GITHUB_REPOSITORY}
