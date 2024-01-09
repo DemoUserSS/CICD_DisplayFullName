@@ -19,18 +19,17 @@ jobs:
       - name: Clear Previous Artifacts
         run: |
           echo "Clearing previous artifacts..."
-  build:
-    runs-on: windows-latest
-
+  
+  create-pull-request:
+    needs: test
+    runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repository
+      - name: Check out repository code
         uses: actions/checkout@v2
-
-      - name: Set up UiPath
-        uses: DemoUserSS/CICD_DisplayFullName
+      - name: Create Pull Request
+        uses: repo-sync/pull-request@v2
         with:
-          orchestrator_url: ${{ secrets.ORCH_URL }}
-          orchestrator_tenant: ${{ secrets.ORCH_TENANT }}
-          orchestrator_client_id: ${{ secrets.ORCH_CLIENT_ID }}
-          orchestrator_user_key: ${{ secrets.ORCH_USER_KEY }}
-          orchestrator_account_name: ${{ secrets.ORCH_ACC_NAME }}
+          destination_branch: main  # Use lowercase 'main'
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          pr_label: "feature, automated pr"  # Fix syntax
+          pr_title: "Pull Request From GitHub Action"
