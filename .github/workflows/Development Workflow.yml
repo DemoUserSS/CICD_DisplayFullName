@@ -8,8 +8,8 @@ on:
 # Here the environment variable is declared in workflow level
 env:
   # Replace with your Orchestrator Values 
-  PROJECT_NAME:                         
-  PROJECT_FOLDER: CI-CD
+  PROJECT_NAME: CICD_Pipeline                        
+  PROJECT_FOLDER: Shared
   ORCH_URL: https://cloud.uipath.com/
   ORCH_TENANT: DefaultTenant
   ORCH_CLIENT_ID: ${{ secrets.UIPATHCLIENTID }}
