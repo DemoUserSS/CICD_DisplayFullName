@@ -19,11 +19,13 @@ jobs:
       - name: Clear Previous Artifacts
         run: |
           echo "Clearing previous artifacts..."
-  build:
-    runs-on: windows-latest
-
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-      
+  build-uipath-nuget-package:
+  needs: cleaner
+  runs-on: windows-latest
+  steps:
+    - name: Check out repository code
+      uses: actions/checkout@v2
+    - name: Build Nuget Package
+      run: |
+        "%GITHUB_WORKSPACE%\scripts\UiPathPack.bat" "%GITHUB_WORKSPACE%\project.json" -destination_folder "%GITHUB_WORKSPACE%\package"
  
