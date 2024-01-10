@@ -26,7 +26,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
       - name: Set up UiPath
-        uses: DemoUserSS/CICD_DisplayFullName@v1.0.0
+        uses: DemoUserSS/CICD_DisplayFullName@2.311.0
         with:
           orchestrator_url: ${{ secrets.ORCH_URL }}
           orchestrator_tenant: ${{ secrets.ORCH_TENANT }}
