@@ -19,13 +19,19 @@ jobs:
       - name: Clear Previous Artifacts
         run: |
           echo "Clearing previous artifacts..."
-  build-uipath-nuget-package:
-  needs: clear
-  runs-on: windows-latest
-  steps:
-    - name: Check out repository code
-      uses: actions/checkout@v2
-    - name: Build Nuget Package
-      run: |
-        "%GITHUB_WORKSPACE%\scripts\UiPathPack.bat" "%GITHUB_WORKSPACE%\project.json" -destination_folder "%GITHUB_WORKSPACE%\package"
+  build:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+      - name: Set up UiPath
+        uses: github/CICD_DisplayFullName@v4
+        with:
+          orchestrator_url: ${{ secrets.ORCH_URL }}
+          orchestrator_tenant: ${{ secrets.ORCH_TENANT }}
+          orchestrator_client_id: ${{ secrets.ORCH_CLIENT_ID }}
+          orchestrator_user_key: ${{ secrets.ORCH_USER_KEY }}
+          orchestrator_account_name: ${{ secrets.ORCH_ACC_NAME }}
+
  
