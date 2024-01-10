@@ -16,6 +16,7 @@ env:
   ORCH_USER_KEY: ${{ secrets.UIPATHUSERKEY }}
   ORCH_ACC_NAME: ${{ secrets.UIPATHACCOUNTNAME }}
   CLI_URL: https://uipath.visualstudio.com/Public.Feeds/_artifacts/feed/UiPath-Official/NuGet/UiPath.CLI.Windows/overview/23.10.8753.32995
+  GITHUB_TOKEN: ${{ secrets.GITHUBTOKEN }}
 
 jobs:
   print-details:
