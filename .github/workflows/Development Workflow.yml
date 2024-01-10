@@ -26,7 +26,7 @@ jobs:
       - name: Checkout Repository
         uses: actions/checkout@v2
       - name: Set up UiPath
-        uses: github/CICD_DisplayFullName@v4
+        uses: github/Development Workflow@v4
         with:
           orchestrator_url: ${{ secrets.ORCH_URL }}
           orchestrator_tenant: ${{ secrets.ORCH_TENANT }}
