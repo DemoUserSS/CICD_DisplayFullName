@@ -19,18 +19,4 @@ jobs:
       - name: Clear Previous Artifacts
         run: |
           echo "Clearing previous artifacts..."
-  build:
-    runs-on: windows-latest
-
-    steps:
-      - name: Checkout Repository
-        uses: actions/checkout@v2
-      - name: Set up UiPath
-        uses: DemoUserSS/CICD_DisplayFullName@v5
-        with:
-          orchestrator_url: ${{ secrets.ORCH_URL }}
-          orchestrator_tenant: ${{ secrets.ORCH_TENANT }}
-          orchestrator_client_id: ${{ secrets.ORCH_CLIENT_ID }}
-          orchestrator_user_key: ${{ secrets.ORCH_USER_KEY }}
-          orchestrator_account_name: ${{ secrets.ORCH_ACC_NAME }}
  
