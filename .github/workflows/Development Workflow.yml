@@ -8,7 +8,7 @@ on:
 # Here the environment variable is declared in workflow level
 env:
   # Replace with your Orchestrator Values 
-  PROJECT_NAME: CI-CDRPA                         
+  PROJECT_NAME:                         
   PROJECT_FOLDER: CI-CD
   ORCH_URL: https://cloud.uipath.com/
   ORCH_TENANT: DefaultTenant
@@ -65,7 +65,7 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: Artifacts
-      - name: Publish Nuget Package to DEV
+      - name: Publish Nuget Package to Dev
         shell: pwsh
         run: ${{ github.workspace }}\Scripts\UiPathDeploy.ps1 ${{ github.workspace }}\package ${{env.ORCH_URL}} ${{env.ORCH_TENANT}} -UserKey ${{env.ORCH_USER_KEY}} -account_name ${{env.ORCH_ACC_NAME}}
   
