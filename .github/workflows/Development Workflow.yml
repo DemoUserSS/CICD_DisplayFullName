@@ -20,7 +20,7 @@ jobs:
         run: |
           echo "Clearing previous artifacts..."
   build-uipath-nuget-package:
-  needs: cleaner
+  needs: clear
   runs-on: windows-latest
   steps:
     - name: Check out repository code
