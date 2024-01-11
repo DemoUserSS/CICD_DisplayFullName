@@ -68,7 +68,7 @@ jobs:
           name: Artifacts
       - name: Publish Nuget Package to DEV
         shell: pwsh
-        run: ${{ github.workspace }}\Scripts\UiPathDeploy.ps1 ${{ github.workspace }}\package ${{env.ORCH_URL}} ${{env.ORCH_TENANT}} -UserKey ${{env.ORCH_USER_KEY}} -account_name ${{env.ORCH_ACC_NAME}}
+        run: ${{ github.workspace }}\Scripts\UiPathDeploy.ps1 ${{ github.workspace }}\package ${{env.ORCH_URL}} ${{env.ORCH_TENANT}} -UserKey PaoUjt1WHz_0u_Jlys4CcLIjUVibAzsOpEgK6-2KOnJv6 -account_name ${{env.ORCH_ACC_NAME}}
   notify_slack:
     runs-on: ubuntu-latest
     needs: publish-uipath-nuget-package
