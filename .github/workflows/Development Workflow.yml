@@ -77,6 +77,8 @@ jobs:
     - name: Notify Success to Slack
       if: success()
       run: |
-        curl -X POST -H 'Content-type: application/json' --data '{"text":"UiPath NuGet Package build and publish successful!"}' https://hooks.slack.com/services/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
+        curl -X POST -H 'Content-type: application/json' --data '{"text":"UiPath NuGet Package build and publish successful!"}' https://hooks.slack.com/services/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
+    - name: Notify Failure to Slack
+      if: failure()
       run: |
-        curl -X POST -H 'Content-type: application/json' --data '{"text":"UiPath NuGet Package build or publish failed!"}'https://hooks.slack.com/services/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
+        curl -X POST -H 'Content-type: application/json' --data '{"text":"UiPath NuGet Package build or publish failed!"}' https://hooks.slack.com/services/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
