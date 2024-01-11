@@ -83,7 +83,7 @@ Param (
 
     #API Access - (Option 2)
     [string] $account_name = "", #Required. The Orchestrator CloudRPA account name. Must be used together with the refresh token and client id.
-	[string] $UserKey =  $env:ORCH_USER_KEY, #Required. The Orchestrator OAuth2 refresh token used for authentication. Must be used together with the account name and client id.
+	[string] $UserKey = "$env:ORCH_USER_KEY", #Required. The Orchestrator OAuth2 refresh token used for authentication. Must be used together with the account name and client id.
     
     #On prem -  (Option 3)
     [string] $orchestrator_user = "", #Required. The Orchestrator username used for authentication. Must be used together with the password.
