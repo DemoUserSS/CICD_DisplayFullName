@@ -82,15 +82,32 @@ jobs:
       - name: Test the Package With Test Cases 
         run: ${{ github.workspace }}\scripts\\UiPathRunTest.ps1  ${{env.ORCH_URL}} ${{env.ORCH_TENANT}} -UserKey ${{env.ORCH_USER_KEY}} -account_name ${{env.ORCH_ACC_NAME}} -testset "TestSet1"
   
+  create-pull-request:
+    needs: test-uipath-published-package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository code
+        uses: actions/checkout@v2
+      - name: pull-request
+        uses: repo-sync/pull-request@v2
+        with:
+          destination_branch: "Main"
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          pr_label: "feature, automated pr"
+          pr_title: "Pull Request From Github Action"
+  
+
+
+
   notify_slack:
     runs-on: ubuntu-latest
-    needs:   test-uipath-published-package
+    needs:    create-pull-request
 
     steps:
     - name: Notify Success to Slack
       if: success()
       run: |
-        curl -X POST -H 'Content-type: application/json' --data '{"text":"UiPath NuGet Package build,publish & tested successful!"}' ${{ secrets.SLACK_WEBHOOK_URL }}
+        curl -X POST -H 'Content-type: application/json' --data '{"text":"UiPath NuGet Package build,publish & tested successful also merged with!"}' ${{ secrets.SLACK_WEBHOOK_URL }}
     - name: Notify Failure to Slack
       if: failure()
       run: |
