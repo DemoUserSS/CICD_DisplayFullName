@@ -119,8 +119,7 @@ jobs:
     - name: Check GitHub Token Permissions
       run: |
         # Print the permissions of the GITHUB_TOKEN
-        echo "GitHub Token Permissions: ${{ toJson(secrets.GITHUB_TOKEN) }}"
-
+        echo "GitHub Token Permissions: ${{ secrets.GITHUB_TOKEN }}"
 
   # notify_slack:
   #   runs-on: ubuntu-latest
