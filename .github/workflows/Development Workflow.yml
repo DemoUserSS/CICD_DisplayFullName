@@ -83,28 +83,20 @@ jobs:
         run: ${{ github.workspace }}\scripts\\UiPathRunTest.ps1  ${{env.ORCH_URL}} ${{env.ORCH_TENANT}} -UserKey ${{env.ORCH_USER_KEY}} -account_name ${{env.ORCH_ACC_NAME}} -testset "TestSet1"
   
   create-pull-request:
-  needs: test-uipath-published-package
-  runs-on: ubuntu-latest
-  steps:
-    - name: Create Pull Request
+    needs: test-uipath-published-package
+    runs-on: ubuntu-latest
+    steps:
+      - name: Create Pull Request
       run: |   
-  
         repo_owner="DemoUSerSS"
         repo_name="CICD_DisplayFullName"
         base_branch="main"
         head_branch="Developer "
         pr_title="Pull Request From GitHub Action"
         pr_body="Description of your pull request goes here."
-
-        
         token="${{ secrets.GITHUB_TOKEN }}"
-
         response=$(curl -X POST \
-          -H "Authorization: token $token" \
-          -H "Accept: application/vnd.github.v3+json" \
-          "https://api.github.com/repos/$repo_owner/$repo_name/pulls" \
-          -d "{\"title\":\"$pr_title\",\"head\":\"$head_branch\",\"base\":\"$base_branch\",\"body\":\"$pr_body\"}")
-
+          -H "Authorization: token $token" \-H "Accept: application/vnd.github.v3+json" \"https://api.github.com/repos/$repo_owner/$repo_name/pulls" \ -d "{\"title\":\"$pr_title\",\"head\":\"$head_branch\",\"base\":\"$base_branch\",\"body\":\"$pr_body\"}")
         echo "$response"
 
   
