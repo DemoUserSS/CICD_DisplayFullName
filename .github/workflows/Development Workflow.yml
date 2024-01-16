@@ -100,7 +100,7 @@ jobs:
           -H "Accept: application/vnd.github.v3+json" \
           "https://api.github.com/repos/$repo_owner/$repo_name/pulls" \
           -d "{\"title\":\"$pr_title\",\"head\":\"$head_branch\",\"base\":\"$base_branch\",\"body\":\"$pr_body\"}")
-      echo "$response"
+          echo "$response"
 
   # merge:
   #   runs-on: ubuntu-latest
