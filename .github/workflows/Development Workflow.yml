@@ -112,8 +112,6 @@ jobs:
 
           echo "GitHub API Response: $response"
   
-
-jobs:
   check-permissions:
     runs-on: ubuntu-latest
 
