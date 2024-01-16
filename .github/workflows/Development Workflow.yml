@@ -85,9 +85,9 @@ jobs:
   create-pull-request:
     needs: test-uipath-published-package
     runs-on: ubuntu-latest
-    steps:
-      - name: Create Pull Request
-      run: |   
+    steps: 
+      - name: Download UiPath Artifacts
+        |   
         repo_owner="DemoUSerSS"
         repo_name="CICD_DisplayFullName"
         base_branch="main"
