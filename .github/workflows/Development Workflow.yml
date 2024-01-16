@@ -88,32 +88,54 @@ jobs:
     steps: 
       - name: Download UiPath Artifacts
         run: |
-          repo_owner="DemoUserSS"  # Fixed typo
+          repo_owner="DemoUserSS"
           repo_name="CICD_DisplayFullName"
           base_branch="main"
           head_branch="Developer"
           pr_title="Pull Request From GitHub Action"
           pr_body="Description of your pull request goes here."
           token="${{ secrets.GITHUB_TOKEN }}"
+        
+          echo "Creating pull request with the following parameters:"
+          echo "Repository Owner: $repo_owner"
+          echo "Repository Name: $repo_name"
+          echo "Base Branch: $base_branch"
+          echo "Head Branch: $head_branch"
+          echo "PR Title: $pr_title"
+          echo "PR Body: $pr_body"
+
           response=$(curl -X POST \
           -H "Authorization: token $token" \
           -H "Accept: application/vnd.github.v3+json" \
           "https://api.github.com/repos/$repo_owner/$repo_name/pulls" \
           -d "{\"title\":\"$pr_title\",\"head\":\"$head_branch\",\"base\":\"$base_branch\",\"body\":\"$pr_body\"}")
-          echo "$response"
- 
-  notify_slack:
+
+          echo "GitHub API Response: $response"
+  
+
+jobs:
+  check-permissions:
     runs-on: ubuntu-latest
-    needs: test-uipath-published-package
 
     steps:
-    - name: Notify Success to Slack
-      if: success()
+    - name: Check GitHub Token Permissions
       run: |
-        curl -X POST -H 'Content-type: application/json' --data '{"text":"UiPath NuGet Package build and publish successful!"}' ${{ secrets.SLACK_WEBHOOK_URL }}
+        # Print the permissions of the GITHUB_TOKEN
+        echo "GitHub Token Permissions: ${{ toJson(secrets.GITHUB_TOKEN) }}"
 
-    - name: Notify Failure to Slack
-      if: failure()
-      run: |
-        curl -X POST -H 'Content-type: application/json' --data '{"text":"UiPath NuGet Package build or publish failed!"}' ${{ secrets.SLACK_WEBHOOK_URL }}
+
+  # notify_slack:
+  #   runs-on: ubuntu-latest
+  #   needs: test-uipath-published-package
+
+  #   steps:
+  #   - name: Notify Success to Slack
+  #     if: success()
+  #     run: |
+  #       curl -X POST -H 'Content-type: application/json' --data '{"text":"UiPath NuGet Package build and publish successful!"}' ${{ secrets.SLACK_WEBHOOK_URL }}
+
+  #   - name: Notify Failure to Slack
+  #     if: failure()
+  #     run: |
+  #       curl -X POST -H 'Content-type: application/json' --data '{"text":"UiPath NuGet Package build or publish failed!"}' ${{ secrets.SLACK_WEBHOOK_URL }}
 
