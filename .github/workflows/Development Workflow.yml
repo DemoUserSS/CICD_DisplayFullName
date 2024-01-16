@@ -110,7 +110,7 @@ jobs:
   # Only run this workflow if the target is the main branch on the pull_request event
     if: github.event_name == 'pull_request' && github.event.pull_request.base.ref == 'main'
     steps:
-      - uses: abinoda/slack-action@master
+      - uses: abinoda/slack-action@v2
         env:
         # Required: Slack Bot Token
           SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
