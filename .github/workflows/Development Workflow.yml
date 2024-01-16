@@ -102,19 +102,18 @@ jobs:
           -d "{\"title\":\"$pr_title\",\"head\":\"$head_branch\",\"base\":\"$base_branch\",\"body\":\"$pr_body\"}")
           echo "$response"
  
-  notify:
-    name: Notify on Slack
+  notify_slack:
     runs-on: ubuntu-latest
-  # Only run this workflow when "build" workflow succeeds
-    needs: [test-uipath-published-package]
-  # Only run this workflow if the target is the main branch on the pull_request event
-    if: github.event_name == 'pull_request' && github.event.pull_request.base.ref == 'main'
-    steps:
-      - uses: DemoUserSS/modified-slack-action@master
+    needs: publish-uipath-nuget-package
 
-        env:
-        # Required: Slack Bot Token
-          SLACK_BOT_TOKEN: ${{ secrets.SLACK_BOT_TOKEN }}
-        with:
-        # Custom message to send to Slack
-          args: '{\"channel\":\"${{ secrets.SLACK_PR_CHANNEL_ID }}\",\"blocks\":[{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"*Pull Request:* ${{ github.event.pull_request.title }}\"}},{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"*Contributor :* ${{ github.event.pull_request.user.login }}\n*Request State:* ${{ github.event.pull_request.state }}\"}},{\"type\":\"section\",\"text\":{\"type\":\"mrkdwn\",\"text\":\"<${{ github.event.pull_request.html_url }}|View Pull Request>\"}}]}'
+    steps:
+    - name: Notify Success to Slack
+      if: success()
+      run: |
+        curl -X POST -H 'Content-type: application/json' --data '{"text":"UiPath NuGet Package build and publish successful!"}' ${{ secrets.SLACK_WEBHOOK_URL }}
+
+    - name: Notify Failure to Slack
+      if: failure()
+      run: |
+        curl -X POST -H 'Content-type: application/json' --data '{"text":"UiPath NuGet Package build or publish failed!"}' ${{ secrets.SLACK_WEBHOOK_URL }}
+
