@@ -125,31 +125,18 @@ jobs:
   #         fi
   #       env:
   #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-   create-pull-request:
-    needs: test-uipath-published-package
-    runs-on: ubuntu-latest
-    steps:
-      - name: Check out repository code
-        uses: actions/checkout@v2
-      - name: pull-request
-        uses: repo-sync/pull-request@v2
-        with:
-          destination_branch: "main"
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          pr_label: "feature, automated pr"
-          pr_title: "Pull Request From Github Action"
-
-   notify:
-    name: Notify on Slack
-    runs-on: ubuntu-latest
-    # Only run this workflow when "build" workflow succeeds
-    needs: [ test-uipath-published-package]
-    if: success()
-    steps:
-    - name: Notify Success to Slack
-      run: |
-        curl -X POST -H 'Content-type: application/json' --data '{"text":"UiPath NuGet Package build,publish & tested successful also merged with!"}' ${{ secrets.SLACK_WEBHOOK_URL }}
-    if: failure()
-    - name: Notify Failure to Slack
-      run: |
-        curl -X POST -H 'Content-type: application/json' --data '{"text":"UiPath NuGet Package build/publish/tested failed!"}' ${{ secrets.SLACK_WEBHOOK_URL }}
+   
+    # notify:
+    # name: Notify on Slack
+    # runs-on: ubuntu-latest
+    # # Only run this workflow when "build" workflow succeeds
+    # needs: [ test-uipath-published-package]
+    # if: success()
+    # steps:
+    # - name: Notify Success to Slack
+    #   run: |
+    #     curl -X POST -H 'Content-type: application/json' --data '{"text":"UiPath NuGet Package build,publish & tested successful also merged with!"}' ${{ secrets.SLACK_WEBHOOK_URL }}
+    # if: failure()
+    # - name: Notify Failure to Slack
+    #   run: |
+    #     curl -X POST -H 'Content-type: application/json' --data '{"text":"UiPath NuGet Package build/publish/tested failed!"}' ${{ secrets.SLACK_WEBHOOK_URL }}
