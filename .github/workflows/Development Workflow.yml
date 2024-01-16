@@ -101,42 +101,11 @@ jobs:
           "https://api.github.com/repos/$repo_owner/$repo_name/pulls" \
           -d "{\"title\":\"$pr_title\",\"head\":\"$head_branch\",\"base\":\"$base_branch\",\"body\":\"$pr_body\"}")
           echo "$response"
-
-  # merge:
-  #   runs-on: ubuntu-latest
-
-  #   steps:
-  #     - name: Checkout code
-  #       uses: actions/checkout@v2
-
-  #     - name: Set up Git
-  #       run: |
-  #         git config --global user.email "sweetechuse@gmail.com.com"
-  #         git config --global user.name "DemoUserSS"
-
-  #     - name: Merge only if approved
-  #       run: |
-  #         PR_NUMBER=$(jq --raw-output .pull_request.number "$GITHUB_EVENT_PATH")
-  #         APPROVALS=$(curl -s -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
-  #           "https://api.github.com/repos/${{ github.repository }}/pulls/$PR_NUMBER/reviews" \
-  #           | jq '.[] | select(.state == "APPROVED") | .user.login')
-
-  #         if [ -z "$APPROVALS" ]; then
-  #           echo "No approvals found. Exiting without merging."
-  #           exit 1
-  #         else
-  #           echo "Approvals found. Merging pull request..."
-  #           git merge --no-ff "${GITHUB_HEAD_REF}" -m "Merge pull request #${PR_NUMBER}"
-  #           git push origin HEAD:${GITHUB_BASE_REF}
-  #         fi
-  #       env:
-  #         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-   
-    notify:
+  notify:
     name: Notify on Slack
     runs-on: ubuntu-latest
     # Only run this workflow when "build" workflow succeeds
-    needs: [ test-uipath-published-package]
+    needs: [create-pull-request]
     if: success()
     steps:
     - name: Notify Success to Slack
