@@ -132,7 +132,7 @@ jobs:
         curl -X POST -H 'Content-type: application/json' --data '{"text":"UiPath NuGet Package build and publish successful! Waiting for your approval!"}' ${{ secrets.SLACK_WEBHOOK_URL }}
 
     
-    else if: failure()
+      else if: failure()
       run: |
         echo "Workflow failed! Sending notification to Slack..."
         curl -X POST -H 'Content-type: application/json' --data '{"text":"UiPath NuGet Package build or publish failed!"}' ${{ secrets.SLACK_WEBHOOK_URL }}
