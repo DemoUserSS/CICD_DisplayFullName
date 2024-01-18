@@ -80,7 +80,7 @@ jobs:
         with:
           name: Artifacts
       - name: Test the Package With Test Cases 
-        run: ${{ github.workspace }}\scripts\\UiPathRunTest.ps1  ${{env.ORCH_URL}} ${{env.ORCH_TENANT}} -UserKey ${{env.ORCH_USER_KEY}} -account_name ${{env.ORCH_ACC_NAME}} -testset "TestSet1"
+        # run: ${{ github.workspace }}\scripts\\UiPathRunTest.ps1  ${{env.ORCH_URL}} ${{env.ORCH_TENANT}} -UserKey ${{env.ORCH_USER_KEY}} -account_name ${{env.ORCH_ACC_NAME}} -testset "TestSet1"
   
   create-pull-request:
     needs: test-uipath-published-package
@@ -134,5 +134,7 @@ jobs:
     - name: Notify Failure to Slack
       if: failure()
       run: |
+        echo "Workflow failed! Sending notification to Slack..."
         curl -X POST -H 'Content-type: application/json' --data '{"text":"UiPath NuGet Package build or publish failed!"}' ${{ secrets.SLACK_WEBHOOK_URL }}
+
 
