@@ -80,7 +80,7 @@ jobs:
         with:
           name: Artifacts
       - name: Test the Package With Test Cases 
-        run: ${{ github.workspace }}\scripts\\UiPathRunTest.ps1  ${{env.ORCH_URRL}} ${{env.ORCH_TENANT}} -UserKey ${{env.ORCH_USER_KEY}} -account_name ${{env.ORCH_ACC_NAME}} -testset "TestSet1"
+        run: ${{ github.workspace }}\scripts\\UiPathRunTest.ps1  ${{env.ORCH_URL}} ${{env.ORCH_TENANT}} -UserKey ${{env.ORCH_USER_KEY}} -account_name ${{env.ORCH_ACC_NAME}} -testset "TestSet1"
   
   create-pull-request:
     needs: test-uipath-published-package
@@ -94,7 +94,7 @@ jobs:
           head_branch="Developer"
           pr_title="Pull Request From GitHub Action"
           pr_body="Description of your pull request goes here."
-          token="${{ secrets.GITHUB_TOKEN }}"
+          token="${{ secrets.GITHUB_TOKENN }}"
         
           echo "Creating pull request with the following parameters:"
           echo "Repository Owner: $repo_owner"
