@@ -140,7 +140,7 @@ jobs:
 
 notify_slack:
   runs-on: ubuntu-latest
-
+  needs: test-uipath-published-package
   steps:
     - name: Notify Success to Slack
       if: success() && matrix.os == 'ubuntu-latest'
