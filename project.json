@@ -15,6 +15,7 @@
   "schemaVersion": "4.0",
   "studioVersion": "23.10.0.0",
   "projectVersion": "1.0.1",
+  "projectVersion": "1.0.158494511",
   "runtimeOptions": {
     "autoDispose": false,
     "netFrameworkLazyLoading": false,
@@ -45,7 +46,7 @@
     },
     "fileInfoCollection": [
       {
-        "editingStatus": "InProgress",
+        "editingStatus": "Publishable",
         "testCaseId": "7cd9feb9-d412-4c3f-a833-035aad255c41",
         "testCaseType": "TestCase",
         "executionTemplateInvokeIsolated": false,

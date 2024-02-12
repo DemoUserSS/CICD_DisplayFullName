@@ -1,9 +1,12 @@
+
 name: Development workflow
+
 
 on:
   push:
     branches:
       - Developer
+
 
 # Here the environment variable is declared in workflow level
 env:
@@ -17,7 +20,6 @@ env:
   ORCH_ACC_NAME: ${{ secrets.UIPATHACCOUNTNAME }}
   CLI_URL: https://uipath.visualstudio.com/Public.Feeds/_artifacts/feed/UiPath-Official/NuGet/UiPath.CLI.Windows/overview/23.10.8753.32995
   
-
 jobs:
   print-details:
     runs-on: ubuntu-latest
@@ -135,6 +137,7 @@ jobs:
           else
             curl -X POST -H 'Content-type: application/json' --data '{"text":"GitHub Actions workflow failed! Please check the workflow logs for details."}' ${{ secrets.SLACK_WEBHOOK_URL }}
           fi
+
 
 
 # notify_slack:
