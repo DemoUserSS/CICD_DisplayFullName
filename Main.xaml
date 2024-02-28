@@ -95,7 +95,7 @@
         <OutArgument x:TypeArguments="x:String">[out_FullName]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="x:String">[in_FirstName+ in_LastName]</InArgument>
+        <InArgument x:TypeArguments="x:String">[in_FirstName]</InArgument>
       </Assign.Value>
     </Assign>
   </Sequence>
